@@ -6,7 +6,7 @@ import (
 
 type Lexer struct {
 	input        string
-	position     int // current position
+	position     int // current position why needs this?
 	readPosition int // next position after current
 	ch           byte
 }
@@ -51,12 +51,25 @@ func (l *Lexer) NextToken() token.Token {
 	case 0:
 		tok.Literal = ""
 		tok.Type = token.EOF
+	default:
+		if isLetter(l.ch) {
+
+		}
 	}
 
 	l.readChar()
 	return tok
 }
 
+func (l *Lexer) readIdentifier() string {
+	position := l.position
+	for 
+}
+
 func newToken(tokenType token.TokenType, ch byte) token.Token {
 	return token.Token{Type: tokenType, Literal: string(ch)}
+}
+
+func isLetter(ch byte) bool {
+	return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_'
 }
